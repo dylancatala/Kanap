@@ -17,12 +17,13 @@ for(i = 0; i < response.length; i++) {
   //Nom Produit
   const productName = document.createElement("h3");
   productName.innerHTML = products.name;
-  
+  //Description produit
+
   const addElements = document.querySelector("#items");
-  aLink.appendChild(articleTag);
   addElements.appendChild(aLink);
-  aLink.appendChild(productName);
+  aLink.appendChild(articleTag);
   articleTag.appendChild(imageElement);
+  articleTag.appendChild(productName);
 
 
 }
