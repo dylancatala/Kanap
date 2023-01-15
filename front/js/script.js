@@ -18,13 +18,16 @@ for(i = 0; i < response.length; i++) {
   const productName = document.createElement("h3");
   productName.innerHTML = products.name;
   //Description produit
+  const productDescription = document.createElement("p");
+  productDescription.innerHTML = products.description;
 
+  // Adding elements to my ID
   const addElements = document.querySelector("#items");
   addElements.appendChild(aLink);
   aLink.appendChild(articleTag);
   articleTag.appendChild(imageElement);
   articleTag.appendChild(productName);
-
+  articleTag.appendChild(productDescription);
 
 }
 }
