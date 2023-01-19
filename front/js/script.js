@@ -6,23 +6,34 @@ const dataBrowse = async () => {
 
   for (i = 0; i < response.length; i++) {
     const products = response[i];
+
+
     // AHREF
     const aLink = document.createElement("a");
     aLink.classList.add("productPage");
     aLink.setAttribute("href", `http://127.0.0.1:5500/front/html/product.html?id=${products._id}`);
+
+
     // BALISE ARTICLE
     const articleTag = document.createElement("article");
+
+
     // Image
     const imageElement = document.createElement("img");
     imageElement.src = products.imageUrl;
+
+
     //Nom Produit
     const productName = document.createElement("h3");
     productName.classList.add("productName");
     productName.innerHTML = products.name;
+
+
     //Description produit
     const productDescription = document.createElement("p");
     productDescription.classList.add("productDescription");
     productDescription.innerHTML = products.description;
+    
 
     // Adding elements to my ID
     const addElements = document.querySelector("#items");
