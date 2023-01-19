@@ -17,9 +17,11 @@ const dataBrowse = async () => {
     imageElement.src = products.imageUrl;
     //Nom Produit
     const productName = document.createElement("h3");
+    productName.classList.add("productName");
     productName.innerHTML = products.name;
     //Description produit
     const productDescription = document.createElement("p");
+    productDescription.classList.add("productDescription");
     productDescription.innerHTML = products.description;
 
     // Adding elements to my ID
@@ -30,11 +32,5 @@ const dataBrowse = async () => {
     articleTag.appendChild(productName);
     articleTag.appendChild(productDescription);
   }
-
-
-
-
-
-
 }
 dataBrowse();
