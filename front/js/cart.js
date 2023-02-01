@@ -107,20 +107,20 @@ function displayItem(id, imageUrl, name, price, color, quantity) {
 }
 
 function showPrice() {
-  let totalQty =  document.getElementById('totalQuantity');
-  let totalPrice = document.getElementById('totalPrice');
-  let qty = 0;
-  let price = 0;
+    let totalQty = document.getElementById('totalQuantity');
+    let totalPrice = document.getElementById('totalPrice');
+    let qty = 0;
+    let price = 0;
 
     const getCommand = JSON.parse(localStorage.getItem('command'));
-    for(let ID in getCommand) {
-      const product = productList.find(function (item) {
-        if (item['_id'] === ID) {
-            return item;
-        }
-    });
-    console.log(ID, product);
-        for(let colors in getCommand[ID]) {
+    for (let ID in getCommand) {
+        const product = productList.find(function (item) {
+            if (item['_id'] === ID) {
+                return item;
+            }
+        });
+        console.log(ID, product);
+        for (let colors in getCommand[ID]) {
             qty += getCommand[ID][colors];
             price += product.price * getCommand[ID][colors];
         }
@@ -163,6 +163,86 @@ execute();
 
 
 
+
+const REGEX = {
+    name: /[A-Za-z\é\è\ê\-]+$/,
+    address: /(?:\d{0,3} +(bis|ter|quat|rue|chemin|route)|\G(?<!^)) (\S+)/i,
+    city: /[A-Za-z\é\è\ê\-]+$/,
+    email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+    objID: /^[a-f0-9]{32}$/i,
+};
+
+const ERRORS = {};
+
+const data = {};
+
+const validateInput = function(inputName, regex, errorClass, errorMsg) {
+    let input = document.getElementById(inputName);
+    let error = document.getElementById(errorClass); 
+    error.innerText = (regex.test(input.value)) ? '' : errorMsg;
+    if((regex.test(input.value))) {
+        delete ERRORS[inputName];
+        data[inputName] = input.value;
+    } else {
+        ERRORS[inputName] = errorMsg;
+        delete data[inputName];
+    }
+};
+
+
+const sendForm = async (contact, products) => {
+    const response = await fetch('http://localhost:3000/api/products/order', {
+        method: 'POST',
+        headers: {
+            accept: 'application.json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({
+            contact: contact,
+            products: products,
+         })
+    });
+   const command = await response.json();
+   
+   if(command) {
+    window.location.href = `/front/html/confirmation.html?orderID=${command.orderId}`;
+   } else {
+    alert("Erreur");
+   }
+
+};
+
+
+let getForm = document.getElementsByClassName('cart__order__form')[0];
+getForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const command = JSON.parse(localStorage.getItem('command'));
+    const products = Object.keys(command);
+
+    if(products.length <= 0) {
+        return alert("Le panier est vide.");
+    }
+
+    for(let productID of products) {
+        if(!REGEX.objID.test(productID)) {
+            return alert("Les produits ne sont pas conformes");
+        }
+    }
+
+
+    validateInput("firstName", REGEX.name, "firstNameErrorMsg", "Votre prénom n'est pas valide");
+    validateInput("lastName", REGEX.name, "lastNameErrorMsg", "Votre nom n'est pas valide");
+    validateInput("address", REGEX.address, "addressErrorMsg", "Votre adresse n'est pas valide");
+    validateInput("city", REGEX.city, "cityErrorMsg", "Votre ville n'est pas valide");
+    validateInput("email", REGEX.email, "emailErrorMsg", "Votre e-mail n'est pas valide");
+
+
+    if(Object.keys(ERRORS).length) {
+        return alert("Le formulaire n'est pas correct")
+    }
+
+    sendForm(data, products);
+});
 
 
 
