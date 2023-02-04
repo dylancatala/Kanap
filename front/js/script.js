@@ -4,6 +4,7 @@ const dataBrowse = async () => {
   let data = await fetch(url);
   let response = await data.json();
 
+  // For Loop to get product ID inside the Fetch data
   for (i = 0; i < response.length; i++) {
     const products = response[i];
 
@@ -33,7 +34,7 @@ const dataBrowse = async () => {
     const productDescription = document.createElement("p");
     productDescription.classList.add("productDescription");
     productDescription.innerHTML = products.description;
-    
+
 
     // Adding elements to my ID
     const addElements = document.querySelector("#items");

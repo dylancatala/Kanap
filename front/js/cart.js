@@ -27,6 +27,7 @@ function deleteItem(id, colors) {
     showPrice();
 }
 
+
 function displayItem(id, imageUrl, name, price, color, quantity) {
     const addArticle = document.createElement("article");
     addArticle.classList.add("cart__item");
