@@ -15,22 +15,22 @@ const dataBrowse = async () => {
     aLink.setAttribute("href", `http://127.0.0.1:5500/front/html/product.html?id=${products._id}`);
 
 
-    // BALISE ARTICLE
+    // Create Article Tag element
     const articleTag = document.createElement("article");
 
 
-    // Image
+    // Create Image element
     const imageElement = document.createElement("img");
     imageElement.src = products.imageUrl;
 
 
-    //Nom Produit
+    //Create H3 Tag & Adding text to H3 with inner
     const productName = document.createElement("h3");
     productName.classList.add("productName");
     productName.innerHTML = products.name;
 
 
-    //Description produit
+    //Create <P> Tag & Adding text to this <P> with inner
     const productDescription = document.createElement("p");
     productDescription.classList.add("productDescription");
     productDescription.innerHTML = products.description;

@@ -8,31 +8,39 @@ const idBrowse = async (id) => {
   console.log(data);
 
 
-  //Page product title
+  //Adding Product Title to the page
   document.title = data.name;
 
 
-  //Image
+
+  //Create Image element
   const imageProduct = document.createElement("img");
   imageProduct.src = data.imageUrl;
+
+
 
   //Adding image to his parent
   const addingData = document.querySelector("article .item__img");
   addingData.appendChild(imageProduct);
 
 
+
+  // Getting title of the product by ID and adding text to it with inner
   const addingTitle = document.getElementById("title");
   addingTitle.innerText = data.name;
 
 
-  //Product description
+
+  // Getting description of the product by ID and adding text to it with inner
   const descriptionProduct = document.getElementById("description");
   descriptionProduct.innerText = data.description;
 
 
-  //Product Price
+
+  //Getting price tag of the element by ID and adding the data price to it with inner
   const productPrice = document.getElementById("price");
   productPrice.innerText = data.price;
+
 
 
   //For loop colors poducts
@@ -55,9 +63,9 @@ const idBrowse = async (id) => {
     } else {
       localData = {};
     }
-    
-    if(localData[id]) {
-      if(localData[id][colors]) {
+
+    if (localData[id]) {
+      if (localData[id][colors]) {
         localData[id][colors] += parseInt(quantity);
       } else {
         localData[id][colors] = parseInt(quantity);
@@ -70,17 +78,21 @@ const idBrowse = async (id) => {
     localStorage.setItem('command', JSON.stringify(localData));
   }
 
-  
-  
+
+
   //ADD PRODUCT TO CART
   const button = document.getElementById("addToCart");
   button.addEventListener('click', function () {
 
-    if(colors.value === '') {
+
+    // IF COLORS VALUE OF THE ITEM SELECTED IS NULL DISPLAYING ALERT
+    if (colors.value === '') {
       alert("Vous n'avez pas sélectionné de couleur pour ce produit.");
       return;
     }
-    if(quantity.value <= 0 || quantity.value > 100) {
+
+    // IF QUANTITY VALUE OF THE ITEM SELECTED IS NULL DISPLAYING ALERT
+    if (quantity.value <= 0 || quantity.value > 100) {
       alert("La quantité sélectionnée est incorrecte.");
       return;
     }
