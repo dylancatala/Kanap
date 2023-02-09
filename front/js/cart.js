@@ -1,7 +1,8 @@
 // Empty array to add data fetch of products
 let productList = [];
 
-
+//Disable HTML form validation
+document.querySelector("form.cart__order__form").setAttribute('novalidate', true);
 
 // Fetching data from products
 const getProductList = async () => {
@@ -259,10 +260,12 @@ getForm.addEventListener('submit', function (e) {
   validateInput("city", REGEX.city, "cityErrorMsg", "Votre ville n'est pas valide");
   validateInput("email", REGEX.email, "emailErrorMsg", "Votre e-mail n'est pas valide");
 
+  console.log(Object.keys(ERRORS).length)
 
   if (Object.keys(ERRORS).length) {
     return alert("Le formulaire n'est pas correct")
   }
+
 
   sendForm(data, products);
 });
