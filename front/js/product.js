@@ -1,7 +1,11 @@
-// Fetch data ID
+// Fetch data ID through the window.location
 let params = (new URL(window.location)).searchParams;
+
+//ID data is store in this let
 let id = params.get('id');
 
+
+//Create a fetch data with template literals to get the specific ID of the product & store it in the dat variable in JSON
 const idBrowse = async (id) => {
   const idData = await fetch(`http://localhost:3000/api/products/${id}`);
   let data = await idData.json();
@@ -107,11 +111,6 @@ const idBrowse = async (id) => {
 
 
   });
-
-
-
-
-
 }
 
 idBrowse(id);

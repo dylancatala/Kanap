@@ -83,6 +83,8 @@ function displayItem(id, imageUrl, name, price, color, quantity) {
   deleteOption.classList.add("deleteItem");
 
 
+
+  //All documents elements created before now added to their childs or parent
   const addElementCart = document.querySelector("#cart__items");
   addElementCart.appendChild(addArticle);
   addArticle.appendChild(imageDiv);
@@ -106,11 +108,12 @@ function displayItem(id, imageUrl, name, price, color, quantity) {
 
 
 
-
+  // Listening on the "delete" button on cart, if someone click on delete it will remove the product
   deleteOption.addEventListener('click', function () {
     deleteItem(id, color);
     this.parentElement.parentElement.remove();
   })
+  //Listening on the quantity change, (ID & Color taken into account to verify that the quantity is changed to the correct product)
   quantityAdded.addEventListener('change', function (e) {
     updateQty(id, color, parseInt(e.target.value));
   })

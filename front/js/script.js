@@ -12,16 +12,20 @@ const dataBrowse = async () => {
     // AHREF
     const aLink = document.createElement("a");
     aLink.classList.add("productPage");
+    //Create a anchor link with template literals to add the correct ID of the product retrieved with the data fetch
     aLink.setAttribute("href", `http://127.0.0.1:5500/front/html/product.html?id=${products._id}`);
+
 
 
     // Create Article Tag element
     const articleTag = document.createElement("article");
 
 
+
     // Create Image element
     const imageElement = document.createElement("img");
     imageElement.src = products.imageUrl;
+
 
 
     //Create H3 Tag & Adding text to H3 with inner
@@ -30,10 +34,12 @@ const dataBrowse = async () => {
     productName.innerHTML = products.name;
 
 
+
     //Create <P> Tag & Adding text to this <P> with inner
     const productDescription = document.createElement("p");
     productDescription.classList.add("productDescription");
     productDescription.innerHTML = products.description;
+
 
 
     // Adding elements to my ID
