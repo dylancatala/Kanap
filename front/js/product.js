@@ -19,6 +19,7 @@ const idBrowse = async (id) => {
 
   //Create Image element
   const imageProduct = document.createElement("img");
+  //Specify the source to find the image in data fetched before
   imageProduct.src = data.imageUrl;
 
 
@@ -31,18 +32,21 @@ const idBrowse = async (id) => {
 
   // Getting title of the product by ID and adding text to it with inner
   const addingTitle = document.getElementById("title");
+  //Specify the source to find the name in data fetched before
   addingTitle.innerText = data.name;
 
 
 
   // Getting description of the product by ID and adding text to it with inner
   const descriptionProduct = document.getElementById("description");
+  //Specify the source to find the description in data fetched before
   descriptionProduct.innerText = data.description;
 
 
 
   //Getting price tag of the element by ID and adding the data price to it with inner
   const productPrice = document.getElementById("price");
+  //Specify the source to find the price in data fetched before
   productPrice.innerText = data.price;
 
 

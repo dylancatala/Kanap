@@ -14,6 +14,7 @@ const getProductList = async () => {
 
 function updateQty(id, colors, quantity) {
 
+  // Parsing data through localStorage with the key "command" to get all data
   let dataCart = JSON.parse(localStorage.getItem('command'));
   dataCart[id][colors] = quantity;
   localStorage.setItem('command', JSON.stringify(dataCart));
@@ -128,7 +129,10 @@ function showPrice() {
   let qty = 0;
   let price = 0;
 
+  //Storing data parsed of command through localStorage on the 'getCommand' variable
   const getCommand = JSON.parse(localStorage.getItem('command'));
+
+  //For in loop to store data of 'getCommand' into ID
   for (let ID in getCommand) {
     const product = productList.find(function (item) {
       if (item['_id'] === ID) {
@@ -142,6 +146,7 @@ function showPrice() {
     }
   }
 
+  //Adding data of quantity & price retrieved before on they're tag element with innerText
   totalQty.innerText = qty;
   totalPrice.innerText = price;
 
@@ -152,8 +157,13 @@ function showPrice() {
 
 
 function render() {
+  //Storing data parsed of command through localStorage on the 'dataCart' variable
   let dataCart = JSON.parse(localStorage.getItem('command'));
+
+  //For in loop to store data of 'dataCart' in dataID
   for (let dataID in dataCart) {
+
+    //Parcouring dataCart to find dataID index and storing it into the 'dataItem' variable
     const dataItem = dataCart[dataID];
     const product = productList.find(function (item, i) {
       if (item['_id'] === dataID) {
@@ -240,15 +250,25 @@ const sendForm = async (contact, products) => {
 };
 
 
+//Getting the form with Class name
 let getForm = document.getElementsByClassName('cart__order__form')[0];
+
+//Event listener on the form when we submit it
 getForm.addEventListener('submit', function (e) {
   e.preventDefault();
+
+  //Parsing data and storing data of 'command' into his variable
   const command = JSON.parse(localStorage.getItem('command'));
+
+  //Object.keys of 'command' to get an array of data and storing it into the 'products' variable
   const products = Object.keys(command);
 
+
+  //If statment of products that we declared before to analyze his length in data inferior at 0
   if (products.length <= 0) {
     return alert("Le panier est vide.");
   }
+
 
   for (let productID of products) {
     if (!REGEX.objID.test(productID)) {
@@ -265,6 +285,7 @@ getForm.addEventListener('submit', function (e) {
 
   console.log(Object.keys(ERRORS).length)
 
+  //Verifying into a if statment if there is error with Object.keys
   if (Object.keys(ERRORS).length) {
     return alert("Le formulaire n'est pas correct")
   }
