@@ -1,54 +1,65 @@
 // Fetch data from API
 const dataBrowse = async () => {
+  // L’URL de l’API où on veut prendre les données
   let url = `http://localhost:3000/api/products`;
+  //Appel du fetch() avec paramètre la variable URL qui contient l’URL de l’API
   let data = await fetch(url);
-  let response = await data.json(); //Data of the API products stored into the 'response' variable
+  //Données de l’API stocker dans la variable Response, demander au format JSON()
+  let response = await data.json();
 
-  // For Loop to get product ID inside the Fetch data
+
+
+
+  //Boucle for qui va parcourir les données de Response et les stocker dans Products
   for (i = 0; i < response.length; i++) {
+    //Données de chaque produits Kanap stocker ici
     const products = response[i];
 
 
-    // Creating an anchor element tag
+
+
+    //Création d’une ancre “<ahref>”
     const aLink = document.createElement("a");
-    // Adding a class to the anchor tag
+    //Création d'une classe
     aLink.classList.add("productPage");
-    //Create a anchor link with template literals to add the correct ID of the product retrieved with the data fetch
+    //On ajoute un attribut à cette ancre, avec paramètre “href” et l’URL de notre page produit unique avec l'ID du canapé stocker dans products
     aLink.setAttribute("href", `http://127.0.0.1:5500/front/html/product.html?id=${products._id}`);
 
 
 
-    // Create Article Tag element
+    //Création d'un tag article
     const articleTag = document.createElement("article");
 
 
 
-    // Create Image element
+    //Création d'un img élément
     const imageElement = document.createElement("img");
-    //Specify the source to find the image in products data fetched before
+    //Où trouver la source de l'image dans Products
     imageElement.src = products.imageUrl;
 
 
 
-    //Create H3 Tag & Adding text to H3 with inner
+    //Création d'un titre H3
     const productName = document.createElement("h3");
-    // Adding a class to the H3 tag
+    //Création d'une classe
     productName.classList.add("productName");
-    //Specify the source to find the name in products data fetched before
-    productName.innerHTML = products.name;
+    //Où trouver la source du nom du produit dans Products
+    productName.innerText = products.name;
 
 
 
-    //Create <P> Tag & Adding text to this <P> with inner
+
+    //Création d'une balise paragraphe
     const productDescription = document.createElement("p");
-    // Adding a class to the paragraph tag
+    //Création d'une classe
     productDescription.classList.add("productDescription");
-    //Specify the source to find the description in products data fetched before
-    productDescription.innerHTML = products.description;
+    //Où trouver la source de la description produit dans Products
+    productDescription.innerText = products.description;
 
 
 
-    // Adding elements to my ID
+
+    //Ajout des éléments créé à leurs parents & enfants
     const addElements = document.querySelector("#items");
     addElements.appendChild(aLink);
     aLink.appendChild(articleTag);
