@@ -1,8 +1,6 @@
 //Création d'un tableau pour accueillir nos données
 let productList = [];
 
-// Disable HTML form validation
-document.querySelector("form.cart__order__form").setAttribute('novalidate', true);
 
 //Fetch des données à partir de l'API Produits
 const getProductList = async () => {
@@ -44,7 +42,7 @@ function deleteItem(id, colors) {
 
 
 
-// Adding parameters to this function to map them into const for adding them to the right tag element created for them
+//Création des éléments HTML, ajout de classes, et mapping des données pour trouver leur source
 function displayItem(id, imageUrl, name, price, color, quantity) {
   const addArticle = document.createElement("article");
   addArticle.classList.add("cart__item");
@@ -93,7 +91,7 @@ function displayItem(id, imageUrl, name, price, color, quantity) {
 
 
 
-  //All documents elements created before now added to their childs or parent
+  //Les documents précédemment créer sont ajouter a leurs parents/enfants
   const addElementCart = document.querySelector("#cart__items");
   addElementCart.appendChild(addArticle);
   addArticle.appendChild(imageDiv);
@@ -117,13 +115,13 @@ function displayItem(id, imageUrl, name, price, color, quantity) {
 
 
 
-  // Listening on the "delete" button on cart, if someone click on delete it will remove the product
+  //Écoute sur le bouton supprimer du panier
   deleteOption.addEventListener('click', function () {
     deleteItem(id, color);
     this.parentElement.parentElement.remove();
   })
 
-  // Listening on the quantity change, (ID & Color taken into account to verify that the quantity is changed to the correct product)
+  //Écoute sur la modification de la quantité dans le panier
   quantityAdded.addEventListener('change', function (e) {
     updateQty(id, color, parseInt(e.target.value));
   })
@@ -324,6 +322,7 @@ getForm.addEventListener('submit', function (e) {
   sendForm(data, products);
 });
 
-
+// Disable HTML form validation
+document.querySelector("form.cart__order__form").setAttribute('novalidate', true);
 
 

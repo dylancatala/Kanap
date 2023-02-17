@@ -63,7 +63,7 @@ const idBrowse = async (id) => {
     //Stockage des couleurs lié au produit
     const dataColors = data.colors[i];
 
-
+    //Création liste déroulante des couleurs
     const addColors = document.createElement("option");
     addColors.setAttribute("value", dataColors);
     addColors.innerText = dataColors;
@@ -113,7 +113,6 @@ const idBrowse = async (id) => {
   const button = document.getElementById("addToCart");
   //Création d'un événement d'écoute sur notre bouton qui écoute au 'click'
   button.addEventListener('click', function () {
-
 
     //Vérification si la couleur à été sélectionner
     if (colors.value === '') {

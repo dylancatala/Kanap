@@ -62,6 +62,7 @@ const dataBrowse = async () => {
     //Ajout des éléments créé à leurs parents & enfants
     const addElements = document.querySelector("#items");
     addElements.appendChild(aLink);
+
     aLink.appendChild(articleTag);
     articleTag.appendChild(imageElement);
     articleTag.appendChild(productName);
